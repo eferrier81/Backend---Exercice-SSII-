@@ -4,19 +4,22 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
-@Entity
+import java.util.Set;
+
 @Getter
 @Setter
-@NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
+@Entity
 public class Personne {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer matricule;
 
-    @NonNull
     private String nom;
+    private String prenom;
+    private String poste;
 
+    @OneToMany(mappedBy = "personne", cascade = CascadeType.ALL)
+    private Set<Participation> participations;
 }
